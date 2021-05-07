@@ -7,7 +7,7 @@ DEFAULT_NAME = "OUTPUT_PDF"
 
 # Return the path of user's desktop
 def get_desktop():
-    return os.path.join(str(Path.home(),"Desktop")
+    return os.path.join(Path.home(),"Desktop")
 
 # Display basic help message
 def help():
@@ -40,6 +40,8 @@ def main():
     path, filename = handle_input()
     destination = os.path.join(get_desktop(),filename+".pdf")
     files = merger.getFiles(path)
+    files = merger.sortFiles(files, path)
+    print(files)
     writer = merger.mergeFiles(files)
 
     with open(destination, 'wb') as f:
